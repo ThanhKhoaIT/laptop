@@ -25,7 +25,7 @@ Install
 Download, review, then execute the script:
 
 ```sh
-curl --remote-name https://raw.githubusercontent.com/thoughtbot/laptop/master/mac
+curl --remote-name https://raw.githubusercontent.com/ThanhKhoaIT/laptop/master/mac
 less mac
 sh mac 2>&1 | tee ~/laptop.log
 ```
@@ -70,19 +70,6 @@ Unix tools:
 [Tmux]: http://tmux.github.io/
 [Zsh]: http://www.zsh.org/
 
-Heroku tools:
-
-* [Heroku Toolbelt] and [Parity] for interacting with the Heroku API
-
-[Heroku Toolbelt]: https://toolbelt.heroku.com/
-[Parity]: https://github.com/thoughtbot/parity
-
-GitHub tools:
-
-* [Hub] for interacting with the GitHub API
-
-[Hub]: http://hub.github.com/
-
 Image tools:
 
 * [ImageMagick] for cropping and resizing images
@@ -97,7 +84,7 @@ Programming languages and configuration:
 
 * [Bundler] for managing Ruby libraries
 * [Node.js] and [NPM], for running apps and installing JavaScript packages
-* [Rbenv] for managing versions of Ruby
+* [RVM] for managing versions of Ruby
 * [Ruby Build] for installing Rubies
 * [Ruby] stable for writing general-purpose code
 
@@ -105,17 +92,17 @@ Programming languages and configuration:
 [ImageMagick]: http://www.imagemagick.org/
 [Node.js]: http://nodejs.org/
 [NPM]: https://www.npmjs.org/
-[Rbenv]: https://github.com/sstephenson/rbenv
+[RVM]: https://github.com/rvm/rvm
 [Ruby Build]: https://github.com/sstephenson/ruby-build
 [Ruby]: https://www.ruby-lang.org/en/
 
 Databases:
 
-* [Postgres] for storing relational data
 * [Redis] for storing key-value data
+* [Elasticsearch] Search engine
 
-[Postgres]: http://www.postgresql.org/
 [Redis]: http://redis.io/
+[Elasticsearch]: https://www.elastic.co/
 
 It should take less than 15 minutes to install (depends on your machine).
 

@@ -71,7 +71,7 @@ gem_install_or_update() {
     gem update "$@"
   else
     gem install "$@"
-    rbenv rehash
+    rvm rehash
   fi
 }
 
@@ -99,7 +99,7 @@ brew bundle --file=- <<EOF
 tap "thoughtbot/formulae"
 tap "homebrew/services"
 
-# Unix
+# Mac
 brew "ctags"
 brew "git"
 brew "openssl"
@@ -110,13 +110,6 @@ brew "tmux"
 brew "vim"
 brew "zsh"
 
-# Heroku
-brew "heroku-toolbelt"
-brew "parity"
-
-# GitHub
-brew "hub"
-
 # Image manipulation
 brew "imagemagick"
 
@@ -126,30 +119,36 @@ brew "qt"
 # Programming languages
 brew "libyaml" # should come after openssl
 brew "node"
-brew "rbenv"
 brew "ruby-build"
 
 # Databases
-brew "postgres", restart_service: true
+brew "mysql", restart_service: true
 brew "redis", restart_service: true
+brew "elasticsearch", restart_service: true
 EOF
+
+# Install Vim Plugin Manager
+curl -fLo ~/.vim/autoload/plug.vim --create-dirs https://raw.githubusercontent.com/junegunn/vim-plug/master/plug.vim
+
+# Install RVM
+curl -L https://get.rvm.io | bash -s stable --auto-dotfiles --autolibs=enable --rails
 
 fancy_echo "Configuring Ruby ..."
 find_latest_ruby() {
-  rbenv install -l | grep -v - | tail -1 | sed -e 's/^ *//'
+  rvm install -l | grep -v - | tail -1 | sed -e 's/^ *//'
 }
 
 ruby_version="$(find_latest_ruby)"
 # shellcheck disable=SC2016
-append_to_zshrc 'eval "$(rbenv init - --no-rehash)"' 1
-eval "$(rbenv init -)"
+append_to_zshrc 'eval "$(rvm init - --no-rehash)"' 1
+eval "$(rvm init -)"
 
-if ! rbenv versions | grep -Fq "$ruby_version"; then
-  RUBY_CONFIGURE_OPTS=--with-openssl-dir=/usr/local/opt/openssl rbenv install -s "$ruby_version"
+if ! rvm versions | grep -Fq "$ruby_version"; then
+  RUBY_CONFIGURE_OPTS=--with-openssl-dir=/usr/local/opt/openssl rvm install -s "$ruby_version"
 fi
 
-rbenv global "$ruby_version"
-rbenv shell "$ruby_version"
+rvm global "$ruby_version"
+rvm shell "$ruby_version"
 gem update --system
 gem_install_or_update 'bundler'
 number_of_cores=$(sysctl -n hw.ncpu)
